@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class MovieController {
 
-    private MovieServiceInterface movieService;// = new MovieService();
+    private MovieServiceInterface movieService;
+
+    public void setMovieService(MovieServiceInterface movieService) {
+        this.movieService = movieService;
+    }
 
     public void addUsingConsole(){
         Scanner sc = new Scanner(System.in);
@@ -18,7 +22,6 @@ public class MovieController {
         System.out.println( "Saisisez le genre du film:" );
         String genre = sc.nextLine();
 
-        //MovieService movieService = new MovieService();
         Movie movie = new Movie(title, genre);
         movieService.registerMovie(movie);
     }

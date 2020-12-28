@@ -8,7 +8,11 @@ import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
 
 public class MovieService implements MovieServiceInterface{
 
-    MovieRepositoryInterface goLiveMovieRepository ;//= new GoLiveMovieRepository();
+    MovieRepositoryInterface goLiveMovieRepository;
+
+    public void setGoLiveMovieRepository(MovieRepositoryInterface goLiveMovieRepository) {
+        this.goLiveMovieRepository = goLiveMovieRepository;
+    }
 
     public void registerMovie(Movie movie){
         goLiveMovieRepository.add(movie);
