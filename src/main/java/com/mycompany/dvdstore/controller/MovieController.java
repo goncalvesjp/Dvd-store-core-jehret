@@ -2,12 +2,13 @@ package com.mycompany.dvdstore.controller;
 
 import com.mycompany.dvdstore.entity.Movie;
 import com.mycompany.dvdstore.service.MovieService;
+import com.mycompany.dvdstore.service.MovieServiceInterface;
 
 import java.util.Scanner;
 
 public class MovieController {
 
-    private MovieService movieService = new MovieService();
+    private MovieServiceInterface movieService;// = new MovieService();
 
     public void addUsingConsole(){
         Scanner sc = new Scanner(System.in);
@@ -17,7 +18,7 @@ public class MovieController {
         System.out.println( "Saisisez le genre du film:" );
         String genre = sc.nextLine();
 
-        MovieService movieService = new MovieService();
+        //MovieService movieService = new MovieService();
         Movie movie = new Movie(title, genre);
         movieService.registerMovie(movie);
     }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieRepository {
+public class MovieRepository implements MovieRepositoryInterface{
     List<Movie> movies = new ArrayList<>();
 
     public void add (Movie movie){
