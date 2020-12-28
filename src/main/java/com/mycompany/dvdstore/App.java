@@ -15,9 +15,9 @@ public class App
     {
         Scanner sc = new Scanner(System.in);
         System.out.println( "Saisisez le titre" );
-        String title = sc.next();
+        String title = sc.nextLine();
         System.out.println( "Saisisez le genre du film" );
-        String genre = sc.next();
+        String genre = sc.nextLine();
 
         MovieService movieService = new MovieService();
         Movie movie = new Movie(title, genre);
