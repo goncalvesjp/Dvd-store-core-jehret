@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+//@Repository
 public class MemoryMovieRepository implements MovieRepositoryInterface {
     List<Movie> movies = new ArrayList<>();
 
