@@ -17,12 +17,12 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    public void addUsingConsole(){
+    public void addUsingConsole() {
         Scanner sc = new Scanner(System.in);
-        System.out.println( "Saisisez le titre:" );
-        String title=sc.nextLine();
+        System.out.println("Saisisez le titre:");
+        String title = sc.nextLine();
 
-        System.out.println( "Saisisez le genre du film:" );
+        System.out.println("Saisisez le genre du film:");
         String genre = sc.nextLine();
 
         Movie movie = new Movie(title, genre);
