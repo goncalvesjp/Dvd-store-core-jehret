@@ -13,6 +13,6 @@ public class AboutUsController {
 
         System.out.println("Tentative d'affichage de l'a-propos");
 
-        return "";
+        return "about-us";
     }
 }
