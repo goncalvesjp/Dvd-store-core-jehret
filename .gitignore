@@ -1,5 +1,5 @@
 /src/main/resources/movies.csv
 /movies.csv
 /*.class
-/target/
-/.idea/
+/target/**
+/.idea/**
