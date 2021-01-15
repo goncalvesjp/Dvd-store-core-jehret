@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 
 @Repository
@@ -18,40 +19,44 @@ public class FileMovieRepository implements MovieRepositoryInterface {
 
 
 
-    public void add(Movie movie) {
-        FileWriter writer;
+    public void add(Movie movie){
+
         long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
-        long id = lastId+1l;
-        try {
-            writer = new FileWriter(file, true);
-            writer.write(id + ";" + movie.getTitle()
-                    + ";" + movie.getGenre()
-                    + ";" + movie.getDescription() + "\n");
+        movie.setId(lastId+1);
+
+        FileWriter writer;
+        try{
+            writer=new FileWriter(file,true);
+            writer.write(movie.getId()+";"+movie.getTitle()+";"+movie.getGenre()+";"+movie.getDescription()+"\n");
             writer.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println("The movie "+movie.getTitle()+" has been added.");
     }
 
 
     @Override
     public List<Movie> list() {
 
-        List<Movie> movies = new ArrayList<>();
+        List<Movie> movies=new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            for (String line; (line = br.readLine()) != null; ) {
-                final Movie movie = new Movie();
-                final String[] titreEtGenre = line.split("\\;");
-                movie.setId(Long.parseLong(titreEtGenre[0]));
-                movie.setTitle(titreEtGenre[1]);
-                movie.setGenre(titreEtGenre[2]);
-                movie.setDescription(titreEtGenre[3]);
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            for(String line; (line = br.readLine()) != null; ) {
+                final Movie movie=new Movie();
+                final String[] allProperties = line.split("\\;");
+                movie.setId(Long.parseLong(allProperties[0]));
+                movie.setTitle(allProperties[1]);
+                movie.setGenre(allProperties[2]);
                 movies.add(movie);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.err.println("A movie from the file does not have a proper id");
             e.printStackTrace();
         }
         return movies;
