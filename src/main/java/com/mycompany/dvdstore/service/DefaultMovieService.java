@@ -11,16 +11,16 @@ import java.util.List;
 @Service
 public class DefaultMovieService implements MovieServiceInterface {
 
-    @Autowired
+
     private MovieRepositoryInterface movieRepository;
 
+    @Autowired
     public void setMovieRepository(MovieRepositoryInterface movieRepository) {
         this.movieRepository = movieRepository;
     }
 
     public void registerMovie(Movie movie) {
         movieRepository.add(movie);
-        //System.out.println(movie.getTitle() + " was added.");
     }
 
     @Override

@@ -9,32 +9,39 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Repository
 public class FileMovieRepository implements MovieRepositoryInterface {
 
     @Value("${movies.file.location}")
     private File file;
 
+
+
     public void add(Movie movie) {
         FileWriter writer;
+        long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
+        long id = lastId+1l;
         try {
             writer = new FileWriter(file, true);
-            writer.write(movie.getTitle()
-                    + ";" + movie.getGenre() + "\n");
+            writer.write(id + ";" + movie.getTitle()
+                    + ";" + movie.getGenre()
+                    + ";" + movie.getDescription() + "\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
     @Override
     public List<Movie> list() {
 
         List<Movie> movies = new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-            for(String line; (line = br.readLine()) != null; ) {
-                final Movie movie=new Movie();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            for (String line; (line = br.readLine()) != null; ) {
+                final Movie movie = new Movie();
                 final String[] titreEtGenre = line.split("\\;");
                 movie.setId(Long.parseLong(titreEtGenre[0]));
                 movie.setTitle(titreEtGenre[1]);
@@ -54,12 +61,12 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     public Movie getById(long id) {
         final Movie movie = new Movie();
         movie.setId(id);
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-            for(String line; (line = br.readLine()) != null; ) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            for (String line; (line = br.readLine()) != null; ) {
 
                 final String[] allProperties = line.split("\\;");
-                final long nextMovieId=Long.parseLong(allProperties[0]);
-                if (nextMovieId==id) {
+                final long nextMovieId = Long.parseLong(allProperties[0]);
+                if (nextMovieId == id) {
                     movie.setTitle(allProperties[1]);
                     movie.setGenre(allProperties[2]);
                     movie.setDescription(allProperties[3]);
@@ -79,6 +86,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         movie.setDescription("UNKNOWN");
         return movie;
     }
+
 
 
     public void setFile(File file) {
