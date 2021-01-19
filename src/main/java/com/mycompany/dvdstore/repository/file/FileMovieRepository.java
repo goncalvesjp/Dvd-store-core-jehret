@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 
 @Repository
@@ -19,7 +18,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
 
 
 
-    public void add(Movie movie){
+    public Movie create(Movie movie){
 
         long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
         movie.setId(lastId+1);
@@ -34,6 +33,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
             e.printStackTrace();
         }
         System.out.println("The movie "+movie.getTitle()+" has been added.");
+        return movie;
     }
 
 

@@ -14,11 +14,12 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
     List<Movie> movies = new ArrayList<>();
     static long cpt=0L;
 
-    public void add(Movie movie) {
+    public Movie create(Movie movie) {
         cpt++;
         movie.setId(cpt);
         movies.add(movie);
         System.out.println("The movie " + movie.getTitle() + " has been added.");
+        return movie;
     }
 
 
