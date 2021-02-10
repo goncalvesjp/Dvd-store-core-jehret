@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class FileMovieRepository implements MovieRepositoryInterface {
 
     @Value("${movies.file.location}")
@@ -18,7 +18,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
 
 
 
-    public Movie create(Movie movie){
+    public Movie add(Movie movie){
 
         long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
         movie.setId(lastId+1);

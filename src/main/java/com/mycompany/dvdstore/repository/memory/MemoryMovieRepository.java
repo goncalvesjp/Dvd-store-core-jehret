@@ -14,7 +14,7 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
     List<Movie> movies = new ArrayList<>();
     static long cpt=0L;
 
-    public Movie create(Movie movie) {
+    public Movie add(Movie movie) {
         cpt++;
         movie.setId(cpt);
         movies.add(movie);
