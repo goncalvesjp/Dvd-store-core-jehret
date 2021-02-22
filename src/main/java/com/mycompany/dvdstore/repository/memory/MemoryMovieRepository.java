@@ -8,13 +8,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //@Repository
 public class MemoryMovieRepository implements MovieRepositoryInterface {
     List<Movie> movies = new ArrayList<>();
     static long cpt=0L;
 
-    public Movie add(Movie movie) {
+
+    @Override
+    public <S extends Movie> S save(S movie) {
         cpt++;
         movie.setId(cpt);
         movies.add(movie);
@@ -22,19 +25,56 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
         return movie;
     }
 
-
     @Override
-    public Movie getById(long id) {
-        return movies.stream().
-                filter(m -> m.getId()==id).
-                findFirst().get();
+    public <S extends Movie> Iterable<S> saveAll(Iterable<S> iterable) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<Movie> list() {
+    public Optional<Movie> findById(Long id) {
+        return movies.stream().
+                filter(m -> m.getId()==id).
+                findFirst();
+        //return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Long aLong) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Iterable<Movie> findAll() {
         return movies;
     }
 
+    @Override
+    public Iterable<Movie> findAllById(Iterable<Long> iterable) {
+        throw new UnsupportedOperationException();
+    }
 
+    @Override
+    public long count() {
+        throw new UnsupportedOperationException();
+    }
 
+    @Override
+    public void deleteById(Long aLong) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void delete(Movie movie) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Movie> iterable) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void deleteAll() {
+        throw new UnsupportedOperationException();
+    }
 }
