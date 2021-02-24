@@ -1,7 +1,5 @@
 package com.mycompany.dvdstore.entity;
 
-//import org.springframework.data.annotation.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
